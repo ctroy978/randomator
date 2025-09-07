@@ -1,0 +1,69 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    
+    # Adjust this to your actual web root
+    root /var/www/html;
+    index index.html index.htm;
+    
+    server_name _;
+    
+    # Increase buffer sizes for larger files
+    client_max_body_size 10M;
+    client_body_buffer_size 2M;
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    
+    # Main location block
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    
+    # Specific handling for MP3 files with proper streaming support
+    location ~ \.mp3$ {
+        # Force correct MIME type
+        add_header Content-Type audio/mpeg;
+        
+        # Enable byte-range requests (crucial for audio streaming)
+        add_header Accept-Ranges bytes;
+        
+        # Allow CORS if needed
+        add_header Access-Control-Allow-Origin *;
+        
+        # Disable buffering for audio files
+        proxy_buffering off;
+        directio 512;
+        
+        # Output buffer size
+        output_buffers 1 128k;
+        
+        # Cache headers
+        expires 7d;
+        add_header Cache-Control "public";
+    }
+    
+    # Handle other audio formats
+    location ~ \.(ogg|wav|m4a)$ {
+        add_header Content-Type audio/ogg;
+        add_header Accept-Ranges bytes;
+        add_header Access-Control-Allow-Origin *;
+        proxy_buffering off;
+        directio 512;
+        output_buffers 1 128k;
+        expires 7d;
+        add_header Cache-Control "public";
+    }
+    
+    # CSS and JS files
+    location ~ \.(css|js)$ {
+        expires 1d;
+        add_header Cache-Control "public";
+    }
+    
+    # Images
+    location ~ \.(jpg|jpeg|png|gif|ico|svg)$ {
+        expires 7d;
+        add_header Cache-Control "public";
+    }
+}

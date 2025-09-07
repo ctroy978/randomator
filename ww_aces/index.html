@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WW Aces Student Selector - A dramatic WWII-themed student selection game">
+    <title>Student Selector - WW Aces Mission</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Operation: Student Selection</h1>
+            <div class="mission-briefing">
+                Select a squadron and commence the mission to reveal a student
+            </div>
+        </header>
+        
+        <main>
+            <canvas id="gameCanvas" width="900" height="600" role="img" aria-label="WW Aces student selector game">
+                Your browser doesn't support HTML5 Canvas. Please upgrade to a modern browser.
+            </canvas>
+            
+            <div class="controls" id="controls">
+                <div class="squadron-selector">
+                    <label for="squadronSelect">Choose Squadron:</label>
+                    <select id="squadronSelect" aria-label="Select a squadron">
+                        <option value="">Loading squadrons...</option>
+                    </select>
+                </div>
+                <button id="missionBtn" class="military-btn" disabled aria-label="Start mission">
+                    COMMENCE MISSION
+                </button>
+                <button id="skipBtn" class="military-btn skip-btn" style="display: none;">
+                    SKIP TO RESULT
+                </button>
+            </div>
+            
+            <div class="result-display" id="resultDisplay" style="display: none;">
+                <div class="result-label">Selected Pilot:</div>
+                <div class="result-name" id="resultName"></div>
+                <button id="nextMissionBtn" class="military-btn">NEXT MISSION</button>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="settings">
+                <button id="settingsBtn" class="settings-btn" aria-label="Settings">⚙</button>
+                <div id="settingsPanel" class="settings-panel" style="display: none;">
+                    <label>
+                        Animation Speed:
+                        <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+                        <span id="speedValue">1x</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="effectsToggle" checked>
+                        Enable Visual Effects
+                    </label>
+                    <label>
+                        <input type="checkbox" id="soundToggle" checked>
+                        Enable Sound
+                    </label>
+                    <label id="volumeControls">
+                        Music Volume:
+                        <input type="range" id="musicVolume" min="0" max="1" step="0.1" value="0.3">
+                        <span id="musicVolumeValue">30%</span>
+                    </label>
+                    <label id="effectsVolumeControls">
+                        Effects Volume:
+                        <input type="range" id="effectsVolume" min="0" max="1" step="0.1" value="0.5">
+                        <span id="effectsVolumeValue">50%</span>
+                    </label>
+                </div>
+            </div>
+            <div class="credits">
+                WWII Aces Student Selector
+            </div>
+        </footer>
+    </div>
+    
+    <script src="js/data-manager.js"></script>
+    <script src="js/audio-manager.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/animation.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

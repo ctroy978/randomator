@@ -1,0 +1,27 @@
+# Audio files
+*.mp3
+
+# Student data
+data/students.json
+*/data/classes.json
+*/data/squadrons.json
+
+# Claude settings
+.claude/
+*/.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class

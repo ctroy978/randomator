@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pit Runner Student Selector - An 8-bit adventure game for randomly selecting students">
+    <title>Student Selector - Pit Runner</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Pit Runner: Student Selector</h1>
+            <div class="instructions">
+                Select a class and click "Start Run" to begin the adventure!
+            </div>
+        </header>
+        
+        <main>
+            <canvas id="gameCanvas" width="900" height="500" role="img" aria-label="Pit Runner student selector game">
+                Your browser doesn't support HTML5 Canvas. Please upgrade to a modern browser.
+            </canvas>
+            
+            <div class="controls" id="controls">
+                <div class="class-selector">
+                    <label for="classSelect">Choose Class:</label>
+                    <select id="classSelect" aria-label="Select a class">
+                        <option value="">Loading classes...</option>
+                    </select>
+                </div>
+                <button id="selectBtn" class="pixel-btn" disabled aria-label="Start the run">
+                    START RUN
+                </button>
+                <button id="skipBtn" class="pixel-btn skip-btn" style="display: none;">
+                    SKIP TO END
+                </button>
+            </div>
+            
+            <div class="result-display" id="resultDisplay" style="display: none;">
+                <div class="result-label">Selected Student:</div>
+                <div class="result-name" id="resultName"></div>
+                <button id="selectAnotherBtn" class="pixel-btn">RUN AGAIN</button>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="settings">
+                <button id="settingsBtn" class="settings-btn" aria-label="Settings">⚙</button>
+                <div id="settingsPanel" class="settings-panel" style="display: none;">
+                    <label>
+                        Animation Speed:
+                        <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+                        <span id="speedValue">1x</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="particlesToggle" checked>
+                        Enable Particles
+                    </label>
+                    <label>
+                        <input type="checkbox" id="soundToggle" checked>
+                        Enable Sound
+                    </label>
+                    <label id="volumeControls">
+                        Music Volume:
+                        <input type="range" id="musicVolume" min="0" max="1" step="0.1" value="0.3">
+                        <span id="musicVolumeValue">30%</span>
+                    </label>
+                    <label id="effectsControls">
+                        Effects Volume:
+                        <input type="range" id="effectsVolume" min="0" max="1" step="0.1" value="0.5">
+                        <span id="effectsVolumeValue">50%</span>
+                    </label>
+                </div>
+            </div>
+            <div class="credits">
+                8-Bit Pit Runner Adventure
+            </div>
+        </footer>
+    </div>
+    
+    <script src="js/data-manager.js"></script>
+    <script src="js/audio-manager.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/animation.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
