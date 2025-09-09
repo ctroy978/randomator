@@ -250,6 +250,49 @@ class UIManager {
             }
         });
 
+        // Music toggle
+        const musicToggle = document.getElementById('musicToggle');
+        const musicVolumeControls = document.getElementById('musicVolumeControls');
+        
+        // Set initial state
+        if (window.musicManager) {
+            if (musicToggle.checked) {
+                musicManager.setEnabled(true);
+            }
+            
+            // Add click listener to document for first user interaction
+            document.addEventListener('click', async () => {
+                if (musicManager.enabled && !musicManager.isPlaying) {
+                    await musicManager.start();
+                }
+            }, { once: true });
+        }
+        
+        musicToggle.addEventListener('change', async (e) => {
+            const enabled = e.target.checked;
+            musicVolumeControls.style.display = enabled ? 'block' : 'none';
+            if (window.musicManager) {
+                musicManager.setEnabled(enabled);
+                if (enabled && !musicManager.isPlaying) {
+                    await musicManager.start();
+                } else if (!enabled) {
+                    musicManager.stop();
+                }
+            }
+        });
+
+        // Music volume slider
+        const musicVolume = document.getElementById('musicVolume');
+        const musicVolumeValue = document.getElementById('musicVolumeValue');
+        
+        musicVolume.addEventListener('input', (e) => {
+            const volume = parseFloat(e.target.value);
+            musicVolumeValue.textContent = Math.round(volume * 100) + '%';
+            if (window.musicManager) {
+                musicManager.setVolume(volume);
+            }
+        });
+
         // Class selector
         const classSelect = document.getElementById('classSelect');
         classSelect.addEventListener('change', (e) => {
@@ -260,7 +303,11 @@ class UIManager {
 
         // Start button
         const startBtn = document.getElementById('startBtn');
-        startBtn.addEventListener('click', () => {
+        startBtn.addEventListener('click', async () => {
+            // Initialize music on first user interaction
+            if (window.musicManager && musicManager.enabled && !musicManager.isPlaying) {
+                await musicManager.start();
+            }
             if (window.game) {
                 window.game.startSelection();
             }

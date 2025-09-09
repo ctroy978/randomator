@@ -62,6 +62,15 @@
                         <input type="range" id="soundVolume" min="0" max="1" step="0.1" value="0.5">
                         <span id="soundVolumeValue">50%</span>
                     </label>
+                    <label>
+                        <input type="checkbox" id="musicToggle" checked>
+                        Enable Background Music
+                    </label>
+                    <label id="musicVolumeControls">
+                        Music Volume:
+                        <input type="range" id="musicVolume" min="0" max="1" step="0.1" value="0.3">
+                        <span id="musicVolumeValue">30%</span>
+                    </label>
                 </div>
             </div>
             <div class="credits">
@@ -72,6 +81,7 @@
     
     <script src="js/data-manager.js"></script>
     <script src="js/audio-manager.js"></script>
+    <script src="js/music-manager.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/animation.js"></script>
     <script src="js/game.js"></script>

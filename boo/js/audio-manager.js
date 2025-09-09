@@ -166,8 +166,9 @@ class AudioManager {
     }
 
     async loadSounds() {
-        // Initialize audio context on first user interaction
-        await this.init();
+        // Don't initialize here - wait for user interaction
+        // Audio context will be created when needed
+        return Promise.resolve();
     }
 }
 

@@ -43,6 +43,13 @@ class Game {
             const classes = await dataManager.getClasses();
             await this.uiManager.populateClassSelector(classes);
             
+            // Add click listener to canvas for music initialization
+            this.canvas.addEventListener('click', async () => {
+                if (window.musicManager && musicManager.enabled && !musicManager.isPlaying) {
+                    await musicManager.start();
+                }
+            }, { once: true });
+            
             this.state = 'MENU';
             this.animate();
         } catch (error) {
@@ -66,6 +73,11 @@ class Game {
             await audioManager.init();
         }
         
+        // Start music if enabled and not already playing
+        if (window.musicManager && !musicManager.isPlaying) {
+            await musicManager.start();
+        }
+        
         // Play ghost appear sound
         audioManager.playGhostAppear();
         
@@ -75,6 +87,11 @@ class Game {
         
         // Start the animation with all students and the selected one
         await this.animationSystem.startSelection(allStudents, this.selectedStudent);
+        
+        // Play dramatic stinger for final reveal
+        if (window.musicManager && musicManager.enabled) {
+            musicManager.playStinger();
+        }
         
         // Show result
         this.state = 'RESULT';
