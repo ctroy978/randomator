@@ -144,8 +144,65 @@ main {
 }
 
 footer {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 20px;
+}
+
+.settings {
+    position: relative;
+}
+
+.settings-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.settings-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.settings-panel {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    padding: 20px;
+    min-width: 250px;
+    z-index: 1000;
+}
+
+.settings-panel label {
+    display: block;
+    margin-bottom: 15px;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.settings-panel input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.settings-panel input[type="range"] {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.settings-panel span {
+    display: inline-block;
+    margin-left: 10px;
+    color: #ffd700;
 }
 
 .credits {

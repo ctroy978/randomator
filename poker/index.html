@@ -41,6 +41,29 @@
         </main>
         
         <footer>
+            <div class="settings">
+                <button id="settingsBtn" class="settings-btn" aria-label="Settings">⚙</button>
+                <div id="settingsPanel" class="settings-panel" style="display: none;">
+                    <label>
+                        <input type="checkbox" id="soundToggle" checked>
+                        Enable Sound
+                    </label>
+                    <label id="volumeControls">
+                        Sound Volume:
+                        <input type="range" id="soundVolume" min="0" max="1" step="0.1" value="0.5">
+                        <span id="soundVolumeValue">50%</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="musicToggle" checked>
+                        Enable Background Music
+                    </label>
+                    <label id="musicVolumeControls">
+                        Music Volume:
+                        <input type="range" id="musicVolume" min="0" max="1" step="0.1" value="0.3">
+                        <span id="musicVolumeValue">30%</span>
+                    </label>
+                </div>
+            </div>
             <div class="credits">
                 Poker Card Student Selector
             </div>
@@ -48,6 +71,7 @@
     </div>
     
     <script src="js/data-manager.js"></script>
+    <script src="js/music-manager.js"></script>
     <script src="js/card.js"></script>
     <script src="js/confetti.js"></script>
     <script src="js/game.js"></script>

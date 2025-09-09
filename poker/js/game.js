@@ -20,6 +20,7 @@ class Game {
         this.confetti = new Confetti(this.canvas);
         
         this.setupEventListeners();
+        this.setupMusicControls();
         this.init();
         this.animate();
     }
@@ -52,6 +53,65 @@ class Game {
         });
     }
 
+    setupMusicControls() {
+        // Settings panel toggle
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsPanel = document.getElementById('settingsPanel');
+        
+        settingsBtn.addEventListener('click', () => {
+            settingsPanel.style.display = settingsPanel.style.display === 'none' ? 'block' : 'none';
+        });
+        
+        // Music toggle
+        const musicToggle = document.getElementById('musicToggle');
+        const musicVolumeControls = document.getElementById('musicVolumeControls');
+        
+        musicToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                musicManager.setEnabled(true);
+                musicManager.start();
+                musicVolumeControls.style.display = 'block';
+            } else {
+                musicManager.setEnabled(false);
+                musicVolumeControls.style.display = 'none';
+            }
+        });
+        
+        // Music volume
+        const musicVolume = document.getElementById('musicVolume');
+        const musicVolumeValue = document.getElementById('musicVolumeValue');
+        
+        musicVolume.addEventListener('input', (e) => {
+            const volume = parseFloat(e.target.value);
+            musicManager.setVolume(volume);
+            musicVolumeValue.textContent = Math.round(volume * 100) + '%';
+        });
+        
+        // Sound effects toggle
+        const soundToggle = document.getElementById('soundToggle');
+        const volumeControls = document.getElementById('volumeControls');
+        
+        soundToggle.addEventListener('change', (e) => {
+            volumeControls.style.display = e.target.checked ? 'block' : 'none';
+        });
+        
+        // Sound volume
+        const soundVolume = document.getElementById('soundVolume');
+        const soundVolumeValue = document.getElementById('soundVolumeValue');
+        
+        soundVolume.addEventListener('input', (e) => {
+            const volume = parseFloat(e.target.value);
+            soundVolumeValue.textContent = Math.round(volume * 100) + '%';
+        });
+        
+        // Start background music on first user interaction
+        document.addEventListener('click', () => {
+            if (musicToggle.checked && !musicManager.isPlaying) {
+                musicManager.start();
+            }
+        }, { once: true });
+    }
+    
     setupEventListeners() {
         this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
         this.canvas.addEventListener('click', (e) => this.handleClick(e));
@@ -171,10 +231,12 @@ class Game {
                     c.select();
                     c.targetX = this.width / 2 - c.width / 2;
                     c.targetY = this.height / 2 - c.height / 2;
+                    musicManager.playCardFlip();
                 }, 800);
             } else {
                 setTimeout(() => {
                     c.flip();
+                    musicManager.playCardFlip();
                 }, index * 200);
                 
                 setTimeout(() => {
@@ -188,6 +250,7 @@ class Game {
             this.winner = card.studentName;
             this.showResult();
             this.confetti.burst(5);
+            musicManager.playWinSound();
             this.state = 'RESULT';
         }, 3500);
     }
