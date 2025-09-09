@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Poker Student Selector - A card-based student selection game">
+    <title>Student Selector - Pick a Card</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Student Selector: Pick a Card</h1>
+            <div class="instructions" id="instructions">
+                Select a class and pick a card to reveal a student
+            </div>
+        </header>
+        
+        <main>
+            <canvas id="gameCanvas" width="900" height="600" role="img" aria-label="Poker card student selector game">
+                Your browser doesn't support HTML5 Canvas. Please upgrade to a modern browser.
+            </canvas>
+            
+            <div class="controls" id="controls">
+                <div class="class-selector">
+                    <label for="classSelect">Choose Class:</label>
+                    <select id="classSelect" aria-label="Select a class">
+                        <option value="">Loading classes...</option>
+                    </select>
+                </div>
+                <button id="dealBtn" class="game-btn" disabled aria-label="Deal cards">
+                    DEAL CARDS
+                </button>
+            </div>
+            
+            <div class="result-display" id="resultDisplay" style="display: none;">
+                <div class="result-label">Selected Student:</div>
+                <div class="result-name" id="resultName"></div>
+                <button id="newGameBtn" class="game-btn">NEW GAME</button>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="credits">
+                Poker Card Student Selector
+            </div>
+        </footer>
+    </div>
+    
+    <script src="js/data-manager.js"></script>
+    <script src="js/card.js"></script>
+    <script src="js/confetti.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
