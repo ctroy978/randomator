@@ -2,9 +2,7 @@
 *.mp3
 
 # Student data
-data/students.json
-*/data/classes.json
-*/data/squadrons.json
+data/
 
 # Claude settings
 .claude/
